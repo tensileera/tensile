@@ -152,9 +152,47 @@
             font-size: clamp(0.9rem, 2vw, 1.1rem);
             text-align: center;
             color: var(--accent-cyan);
-            margin-bottom: 80px;
+            margin-bottom: 40px;
             animation: fadeIn 1.5s ease-out 0.9s both;
             letter-spacing: 1px;
+        }
+        
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeIn 1.5s ease-out 1.2s both;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--border-color);
+            background: var(--secondary-bg);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.2);
+        }
+        
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-secondary);
+            transition: fill 0.3s ease;
+        }
+        
+        .social-link:hover svg {
+            fill: var(--accent-cyan);
         }
         
         /* Content Sections */
@@ -411,11 +449,36 @@
             padding: 40px;
             border: 2px solid var(--border-color);
             transition: all 0.4s ease;
+            position: relative;
         }
         
         .comparison-column.rigid {
             border-color: var(--accent-orange);
             background: rgba(255, 107, 53, 0.03);
+        }
+        
+        .comparison-column.rigid::before {
+            content: 'BETA LIMIT';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-orange);
+            opacity: 0.5;
+            letter-spacing: 1px;
+        }
+        
+        .comparison-column.rigid::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border-right: 3px solid var(--accent-orange);
+            pointer-events: none;
+            opacity: 0.3;
         }
         
         .comparison-column.tensile {
@@ -549,7 +612,7 @@
         /* Footer */
         .footer {
             text-align: center;
-            padding: 60px 40px;
+            padding: 60px 40px 40px;
             border-top: 1px solid var(--border-color);
         }
         
@@ -564,7 +627,14 @@
             font-size: 1.2rem;
             color: var(--text-secondary);
             font-style: italic;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
         }
         
         .footer-note {
@@ -573,26 +643,19 @@
             color: var(--text-secondary);
         }
         
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        /* Accessibility: Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .rotating-element,
+            .classified-banner::before {
+                animation: none;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .background-canvas {
+                display: none;
             }
-        }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
         
@@ -627,6 +690,43 @@
             .domain-section {
                 padding: 60px 20px;
                 margin: 80px -20px;
+            }
+            
+            .domain-list li {
+                padding: 20px 0;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .social-link svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -664,6 +764,19 @@
         <p class="tagline">
             We fight gravity with geometry, not mass.
         </p>
+        
+        <div class="social-links">
+            <a href="https://www.linkedin.com/company/tensileera/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+            <a href="https://x.com/TensileEra" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+        </div>
     </section>
     
     <!-- Main Content -->
@@ -891,84 +1004,115 @@
     <footer class="footer">
         <div class="footer-brand">KTX</div>
         <div class="footer-tagline">Building the Geometry of the Next Century.</div>
+        
+        <div class="footer-social">
+            <a href="https://www.linkedin.com/company/tensileera/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+            <a href="https://x.com/TensileEra" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+        </div>
+        
         <div class="footer-note">Tensile Era (TE) • Dynamic Engineering • 2026</div>
     </footer>
     
     <!-- Background Animation Script -->
     <script>
-        // Animated background with geometric patterns
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-        
-        class RotatingLine {
-            constructor(x, y, length, speed) {
-                this.x = x;
-                this.y = y;
-                this.length = length;
-                this.angle = Math.random() * Math.PI * 2;
-                this.speed = speed;
+        if (!prefersReducedMotion) {
+            // Animated background with geometric patterns
+            const canvas = document.getElementById('bgCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // High-DPI canvas rendering
+            function resizeCanvas() {
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.getBoundingClientRect();
+                
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                
+                ctx.scale(dpr, dpr);
+                
+                canvas.style.width = rect.width + 'px';
+                canvas.style.height = rect.height + 'px';
             }
             
-            update() {
-                this.angle += this.speed;
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            
+            class RotatingLine {
+                constructor(x, y, length, speed) {
+                    this.x = x;
+                    this.y = y;
+                    this.length = length;
+                    this.angle = Math.random() * Math.PI * 2;
+                    this.speed = speed;
+                }
+                
+                update() {
+                    this.angle += this.speed;
+                }
+                
+                draw() {
+                    const rect = canvas.getBoundingClientRect();
+                    
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.angle);
+                    
+                    // Draw line
+                    ctx.strokeStyle = 'rgba(0, 217, 255, 0.3)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo(this.length, 0);
+                    ctx.stroke();
+                    
+                    // Draw tip
+                    ctx.fillStyle = 'rgba(255, 107, 53, 0.5)';
+                    ctx.beginPath();
+                    ctx.arc(this.length, 0, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.restore();
+                }
             }
             
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle);
-                
-                // Draw line
-                ctx.strokeStyle = 'rgba(0, 217, 255, 0.3)';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.lineTo(this.length, 0);
-                ctx.stroke();
-                
-                // Draw tip
-                ctx.fillStyle = 'rgba(255, 107, 53, 0.5)';
-                ctx.beginPath();
-                ctx.arc(this.length, 0, 2, 0, Math.PI * 2);
-                ctx.fill();
-                
-                ctx.restore();
+            const rotors = [];
+            const numRotors = 8;
+            
+            for (let i = 0; i < numRotors; i++) {
+                rotors.push(new RotatingLine(
+                    Math.random() * window.innerWidth,
+                    Math.random() * window.innerHeight,
+                    50 + Math.random() * 100,
+                    (Math.random() - 0.5) * 0.01
+                ));
             }
-        }
-        
-        const rotors = [];
-        const numRotors = 8;
-        
-        for (let i = 0; i < numRotors; i++) {
-            rotors.push(new RotatingLine(
-                Math.random() * canvas.width,
-                Math.random() * canvas.height,
-                50 + Math.random() * 100,
-                (Math.random() - 0.5) * 0.01
-            ));
-        }
-        
-        function animate() {
-            ctx.fillStyle = 'rgba(10, 14, 23, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            rotors.forEach(rotor => {
-                rotor.update();
-                rotor.draw();
-            });
+            function animate() {
+                const rect = canvas.getBoundingClientRect();
+                ctx.fillStyle = 'rgba(10, 14, 23, 0.1)';
+                ctx.fillRect(0, 0, rect.width, rect.height);
+                
+                rotors.forEach(rotor => {
+                    rotor.update();
+                    rotor.draw();
+                });
+                
+                requestAnimationFrame(animate);
+            }
             
-            requestAnimationFrame(animate);
+            animate();
         }
-        
-        animate();
         
         // Scroll-triggered animations
         const observerOptions = {
