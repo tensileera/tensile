@@ -3,159 +3,990 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TensileEra | The Rigid Age Is Over</title>
-    <meta name="description" content="Dynamic Tension replaces Static Compression. The infrastructure ships inside the box.">
+    <title>TensileEra | We Fight Gravity with Geometry, Not Mass</title>
+    <meta name="description" content="Dynamic Tension replaces Static Compression. Linear scaling replaces cubic limits.">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        :root {
+            --primary-bg: #0A0E17;
+            --secondary-bg: #131823;
+            --accent-cyan: #00D9FF;
+            --accent-orange: #FF6B35;
+            --text-primary: #E8E9ED;
+            --text-secondary: #8E9AAF;
+            --border-color: #1F2937;
+        }
+        
         body {
-            background: #000000;
-            color: #FFFFFF;
-            font-family: 'Courier New', Courier, monospace;
-            line-height: 1.8;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 40px 20px;
-            max-width: 900px;
-            margin: 0 auto;
+            z-index: 1;
         }
         
-        .headline {
-            font-size: 3em;
-            font-weight: bold;
+        .logo-container {
             margin-bottom: 60px;
-            letter-spacing: 2px;
-            border-bottom: 2px solid #FFFFFF;
-            padding-bottom: 20px;
+            animation: fadeInDown 1.2s ease-out;
         }
         
-        .body-text {
-            font-size: 1.1em;
-            margin-bottom: 50px;
-            line-height: 2;
-        }
-        
-        .subhead {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 40px;
-            letter-spacing: 1px;
-        }
-        
-        .bullet-points {
-            list-style: none;
-            margin-bottom: 60px;
-        }
-        
-        .bullet-points li {
-            font-size: 1.1em;
-            margin-bottom: 25px;
-            padding-left: 30px;
+        .tensile-logo {
+            width: 120px;
+            height: 120px;
             position: relative;
         }
         
-        .bullet-points li:before {
-            content: "*";
+        .rotating-element {
             position: absolute;
-            left: 0;
-            font-size: 1.3em;
+            width: 100%;
+            height: 100%;
+            animation: spin 8s linear infinite;
         }
         
-        .equation {
-            font-family: 'Courier New', monospace;
-            font-size: 1em;
-            letter-spacing: 1px;
+        .rotor-line {
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: var(--accent-cyan);
+            top: 50%;
+            left: 50%;
+            transform-origin: left center;
+            box-shadow: 0 0 10px var(--accent-cyan);
         }
         
-        .footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 2px solid #FFFFFF;
-            font-size: 1.2em;
-            font-weight: bold;
+        .rotor-line:nth-child(1) { transform: rotate(0deg); }
+        .rotor-line:nth-child(2) { transform: rotate(90deg); }
+        .rotor-line:nth-child(3) { transform: rotate(180deg); }
+        .rotor-line:nth-child(4) { transform: rotate(270deg); }
+        
+        .hub {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px var(--accent-cyan);
+        }
+        
+        .tip-mass {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent-orange);
+        }
+        
+        .tip-mass:nth-child(1) { top: 50%; right: -4px; transform: translateY(-50%); }
+        .tip-mass:nth-child(2) { left: 50%; bottom: -4px; transform: translateX(-50%); }
+        .tip-mass:nth-child(3) { top: 50%; left: -4px; transform: translateY(-50%); }
+        .tip-mass:nth-child(4) { left: 50%; top: -4px; transform: translateX(-50%); }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .headline {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-out 0.3s both;
+            line-height: 1.1;
+        }
+        
+        .headline-gradient {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subheadline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+            animation: fadeIn 1.5s ease-out 0.6s both;
+            letter-spacing: 2px;
         }
         
         .tagline {
-            font-size: 0.95em;
-            margin-top: 15px;
-            font-style: italic;
-            font-weight: normal;
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            text-align: center;
+            color: var(--accent-cyan);
+            margin-bottom: 80px;
+            animation: fadeIn 1.5s ease-out 0.9s both;
+            letter-spacing: 1px;
         }
         
-        .contact {
-            margin-top: 40px;
-            font-size: 1em;
+        /* Content Sections */
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
         }
         
-        .contact a {
-            color: #FFFFFF;
-            text-decoration: none;
-            border: 2px solid #FFFFFF;
-            padding: 12px 30px;
+        .section {
+            margin-bottom: 120px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            position: relative;
             display: inline-block;
-            transition: all 0.3s;
         }
         
-        .contact a:hover {
-            background: #FFFFFF;
-            color: #000000;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        
+        .body-text {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            line-height: 2;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+        
+        .body-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        /* Principle Cards */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .principle-card {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent-cyan);
+            transition: height 0.4s ease;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        
+        .principle-card:hover::before {
+            height: 100%;
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.1);
+        }
+        
+        .principle-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .principle-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .principle-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .equation {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 3px solid var(--accent-cyan);
+        }
+        
+        /* Use Case Grid */
+        .usecase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+        
+        .usecase-card {
+            background: linear-gradient(135deg, var(--secondary-bg) 0%, rgba(19, 24, 35, 0.6) 100%);
+            border: 1px solid var(--border-color);
+            padding: 35px 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .usecase-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-orange));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .usecase-card:hover::after {
+            opacity: 0.3;
+        }
+        
+        .usecase-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0, 217, 255, 0.15);
+        }
+        
+        .usecase-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--accent-cyan));
+        }
+        
+        .usecase-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+        }
+        
+        .usecase-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .usecase-tag {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+        
+        /* Domain Section */
+        .domain-section {
+            background: var(--secondary-bg);
+            padding: 80px 40px;
+            margin: 100px -40px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .domain-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            margin-top: 60px;
+        }
+        
+        .domain-column h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+        }
+        
+        .domain-list {
+            list-style: none;
+        }
+        
+        .domain-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        
+        .domain-list li:hover {
+            color: var(--text-primary);
+            padding-left: 10px;
+            border-color: var(--accent-cyan);
+        }
+        
+        .domain-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Comparison Section */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .comparison-column {
+            padding: 40px;
+            border: 2px solid var(--border-color);
+            transition: all 0.4s ease;
+        }
+        
+        .comparison-column.rigid {
+            border-color: var(--accent-orange);
+            background: rgba(255, 107, 53, 0.03);
+        }
+        
+        .comparison-column.tensile {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 217, 255, 0.03);
+        }
+        
+        .comparison-column:hover {
+            transform: scale(1.02);
+        }
+        
+        .comparison-label {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-column.rigid .comparison-label {
+            color: var(--accent-orange);
+        }
+        
+        .comparison-column.tensile .comparison-label {
+            color: var(--accent-cyan);
+        }
+        
+        .comparison-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-equation {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .comparison-column.rigid .comparison-equation {
+            color: var(--accent-orange);
+        }
+        
+        .comparison-column.tensile .comparison-equation {
+            color: var(--accent-cyan);
+        }
+        
+        /* Classified Banner */
+        .classified-banner {
+            background: linear-gradient(90deg, rgba(255, 107, 53, 0.1) 0%, rgba(0, 217, 255, 0.1) 100%);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            margin: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .classified-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+        
+        @keyframes scan {
+            to { left: 100%; }
+        }
+        
+        .classified-text {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 40px;
+            background: var(--secondary-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .cta-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        
+        .cta-text {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-bg);
+            background: var(--accent-cyan);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent-cyan);
+            box-shadow: 0 0 50px rgba(0, 217, 255, 0.5);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 40px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-brand {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        
+        .footer-note {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .domain-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
-            .headline {
-                font-size: 2em;
+            .comparison {
+                grid-template-columns: 1fr;
             }
             
-            .subhead {
-                font-size: 1.5em;
+            .principles-grid {
+                grid-template-columns: 1fr;
             }
             
-            .body-text, .bullet-points li {
-                font-size: 1em;
+            .usecase-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 60px 20px;
+            }
+            
+            .hero {
+                padding: 40px 20px;
+            }
+            
+            .domain-section {
+                padding: 60px 20px;
+                margin: 80px -20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="headline">
-        THE RIGID AGE IS OVER.
-    </div>
+    <!-- Animated Background -->
+    <canvas class="background-canvas" id="bgCanvas"></canvas>
     
-    <div class="body-text">
-        For 100 years, Aerospace has fought gravity with mass.<br>
-        We built heavier beams to carry heavier loads.<br>
-        We accepted the Cube-Square Law as a limit.<br>
-        We accepted that scaling up meant slowing down.<br><br>
-        We were wrong.
-    </div>
-    
-    <div class="subhead">
-        WELCOME TO THE TENSILE ERA.
-    </div>
-    
-    <ul class="bullet-points">
-        <li>
-            <strong>Structure:</strong> Mass scales linearly. Not cubically.
-        </li>
-        <li>
-            <strong>Energy:</strong> Geometry replaces Material.
-        </li>
-        <li>
-            <strong>Deployment:</strong> The system packs smaller than the mission.
-        </li>
-    </ul>
-    
-    <div class="footer">
-        KTX
-        <div class="tagline">
-            Building the Geometry of the Next Century.
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="logo-container">
+            <div class="tensile-logo">
+                <div class="rotating-element">
+                    <div class="rotor-line"></div>
+                    <div class="rotor-line"></div>
+                    <div class="rotor-line"></div>
+                    <div class="rotor-line"></div>
+                    <div class="tip-mass"></div>
+                    <div class="tip-mass"></div>
+                    <div class="tip-mass"></div>
+                    <div class="tip-mass"></div>
+                </div>
+                <div class="hub"></div>
+            </div>
         </div>
+        
+        <h1 class="headline">
+            <span class="headline-gradient">THE RIGID AGE IS OVER</span>
+        </h1>
+        
+        <p class="subheadline">
+            TENSILE ERA (TE)<br>not Extra-Terrestrial (ET)
+        </p>
+        
+        <p class="tagline">
+            We fight gravity with geometry, not mass.
+        </p>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Introduction Section -->
+        <section class="section">
+            <h2 class="section-title">THE PROBLEM</h2>
+            <p class="body-text">
+                For 100 years, Aerospace has fought gravity with mass.<br>
+                We built <strong>heavier beams</strong> to carry heavier loads.<br>
+                We accepted the <strong>Cube-Square Law</strong> as a limit.<br>
+                We accepted that scaling up meant slowing down.<br><br>
+                <strong>We were wrong.</strong>
+            </p>
+        </section>
+        
+        <!-- Principles Section -->
+        <section class="section">
+            <h2 class="section-title">THE TENSILE ERA</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-label">Structure</div>
+                    <h3 class="principle-title">Linear Scaling</h3>
+                    <p class="principle-description">
+                        Mass scales linearly with size. Not cubically. The architecture bypasses fundamental limits.
+                    </p>
+                    <div class="equation">M ∝ L</div>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-label">Energy</div>
+                    <h3 class="principle-title">Geometry Over Material</h3>
+                    <p class="principle-description">
+                        Structure emerges from physics, not mass. Motion creates rigidity where none existed.
+                    </p>
+                    <div class="equation">F = mrω²</div>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-label">Deployment</div>
+                    <h3 class="principle-title">Packable Infrastructure</h3>
+                    <p class="principle-description">
+                        The system packs smaller than the mission. Infrastructure ships inside the box.
+                    </p>
+                    <div class="equation">Volume ∝ L</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Comparison Section -->
+        <section class="section">
+            <h2 class="section-title">THE DIVERGENCE</h2>
+            <p class="body-text">
+                At small scales, the difference is marginal.<br>
+                At <strong>operational scales</strong>, the difference is <strong>decisive</strong>.<br>
+                The bigger we build, the more we win.
+            </p>
+            
+            <div class="comparison">
+                <div class="comparison-column rigid">
+                    <div class="comparison-label">Legacy Architecture</div>
+                    <h3 class="comparison-title">RIGID / COMPRESSIVE</h3>
+                    <p class="principle-description">
+                        Traditional structures fight fundamental forces. Mass grows exponentially with scale.
+                    </p>
+                    <div class="comparison-equation">
+                        M_rigid ∝ L³
+                    </div>
+                    <p class="principle-description" style="margin-top: 20px;">
+                        <strong>Result:</strong> Physics wall. Heavy-lift becomes impossible.
+                    </p>
+                </div>
+                
+                <div class="comparison-column tensile">
+                    <div class="comparison-label">Next-Gen Architecture</div>
+                    <h3 class="comparison-title">TENSILE / DYNAMIC</h3>
+                    <p class="principle-description">
+                        New architecture leverages different physics. Mass grows linearly with scale.
+                    </p>
+                    <div class="comparison-equation">
+                        M_tensile ∝ L
+                    </div>
+                    <p class="principle-description" style="margin-top: 20px;">
+                        <strong>Result:</strong> Advantage grows as L². New category unlocked.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Applications Section -->
+        <section class="section">
+            <h2 class="section-title">APPLICATIONS</h2>
+            <p class="body-text">
+                A foundational architecture enables capabilities across domains.<br>
+                Linear scaling unlocks what was previously <strong>physically impossible</strong>.
+            </p>
+            
+            <div class="usecase-grid">
+                <div class="usecase-card">
+                    <div class="usecase-icon">⚡</div>
+                    <h3 class="usecase-title">Energy Generation</h3>
+                    <p class="usecase-description">
+                        Utility-scale systems with swept areas measured in acres, not square meters. Fundamentally different economics.
+                    </p>
+                    <span class="usecase-tag">Commercial</span>
+                </div>
+                
+                <div class="usecase-card">
+                    <div class="usecase-icon">📡</div>
+                    <h3 class="usecase-title">Persistent Platforms</h3>
+                    <p class="usecase-description">
+                        High-altitude infrastructure with station-keeping measured in months. Deployable, attritable, resilient.
+                    </p>
+                    <span class="usecase-tag">Defense</span>
+                </div>
+                
+                <div class="usecase-card">
+                    <div class="usecase-icon">📦</div>
+                    <h3 class="usecase-title">Heavy Logistics</h3>
+                    <p class="usecase-description">
+                        Multi-ton payloads from austere environments. No runway. No depot. Volume-decoupled shipping.
+                    </p>
+                    <span class="usecase-tag">Defense</span>
+                </div>
+                
+                <div class="usecase-card">
+                    <div class="usecase-icon">🛰️</div>
+                    <h3 class="usecase-title">Near-Space Operations</h3>
+                    <p class="usecase-description">
+                        Stratospheric persistence for sensing, communications, and edge computing. Anti-jam assured PNT.
+                    </p>
+                    <span class="usecase-tag">Dual-Use</span>
+                </div>
+                
+                <div class="usecase-card">
+                    <div class="usecase-icon">🎯</div>
+                    <h3 class="usecase-title">Contested Environments</h3>
+                    <p class="usecase-description">
+                        Survivability through physics, not armor. Graceful degradation. Ballistic transparency at scale.
+                    </p>
+                    <span class="usecase-tag">Defense</span>
+                </div>
+                
+                <div class="usecase-card">
+                    <div class="usecase-icon">🔄</div>
+                    <h3 class="usecase-title">Adaptive Infrastructure</h3>
+                    <p class="usecase-description">
+                        Redeployable systems that reconfigure for mission. Stowed volume decoupled from operational scale.
+                    </p>
+                    <span class="usecase-tag">Multi-Domain</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Classified Banner -->
+        <div class="classified-banner">
+            <p class="classified-text">
+                Additional applications under development // Full technical specifications available to qualified parties
+            </p>
+        </div>
+        
+        <!-- Domain Section -->
+        <div class="domain-section">
+            <h2 class="section-title" style="text-align: center; display: block; margin-bottom: 20px;">DOMAIN APPLICABILITY</h2>
+            <p class="body-text" style="text-align: center; max-width: 800px; margin: 0 auto 60px;">
+                The same physics that enable linear scaling apply across operational environments.<br>
+                From ground-based generation to stratospheric persistence.
+            </p>
+            
+            <div class="domain-grid">
+                <div class="domain-column">
+                    <h3>PRIMARY DOMAINS</h3>
+                    <ul class="domain-list">
+                        <li>Utility-Scale Energy Generation</li>
+                        <li>Stratospheric Persistent Platforms</li>
+                        <li>Contested Logistics & Heavy Lift</li>
+                        <li>Point-of-Need Infrastructure</li>
+                        <li>Anti-Access/Area Denial (A2/AD) Operations</li>
+                        <li>Attritable Platform Networks</li>
+                    </ul>
+                </div>
+                
+                <div class="domain-column">
+                    <h3>EMERGING DOMAINS</h3>
+                    <ul class="domain-list">
+                        <li>Tethered Hybrid Power/Lift</li>
+                        <li>Multi-Domain Coordination Systems</li>
+                        <li>Disaster Response & Humanitarian Aid</li>
+                        <li>Remote Site Construction & Mining</li>
+                        <li>Agricultural & Environmental Monitoring</li>
+                        <li>Space Access Support Systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Impact Section -->
+        <section class="section">
+            <h2 class="section-title">THE STRATEGIC IMPLICATION</h2>
+            <p class="body-text">
+                This is not an incremental improvement to existing platforms.<br>
+                This is a <strong>new category of infrastructure</strong>.<br><br>
+                
+                Systems that were physically impossible become <strong>economically inevitable</strong>.<br>
+                Deployment timelines measured in hours, not months.<br>
+                Lifecycle costs determined by physics, not logistics.<br><br>
+                
+                We are not replacing helicopters or wind turbines.<br>
+                We are <strong>obsoleting the constraints</strong> that defined them.
+            </p>
+        </section>
     </div>
     
-    <div class="contact">
-        <a href="mailto:TENSILEERA@GMAIL.COM">Inquire for Access</a>
-    </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="cta-title">THE GEOMETRY OF THE NEXT CENTURY</h2>
+        <p class="cta-text">
+            Linear scaling. Volume-decoupled deployment. Multi-domain resilience.<br>
+            The infrastructure that scales when nothing else can.
+        </p>
+        <a href="mailto:TENSILEERA@GMAIL.COM" class="cta-button">Inquire for Access</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-brand">KTX</div>
+        <div class="footer-tagline">Building the Geometry of the Next Century.</div>
+        <div class="footer-note">Tensile Era (TE) • Dynamic Engineering • 2026</div>
+    </footer>
+    
+    <!-- Background Animation Script -->
+    <script>
+        // Animated background with geometric patterns
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        class RotatingLine {
+            constructor(x, y, length, speed) {
+                this.x = x;
+                this.y = y;
+                this.length = length;
+                this.angle = Math.random() * Math.PI * 2;
+                this.speed = speed;
+            }
+            
+            update() {
+                this.angle += this.speed;
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                
+                // Draw line
+                ctx.strokeStyle = 'rgba(0, 217, 255, 0.3)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(this.length, 0);
+                ctx.stroke();
+                
+                // Draw tip
+                ctx.fillStyle = 'rgba(255, 107, 53, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.length, 0, 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+        }
+        
+        const rotors = [];
+        const numRotors = 8;
+        
+        for (let i = 0; i < numRotors; i++) {
+            rotors.push(new RotatingLine(
+                Math.random() * canvas.width,
+                Math.random() * canvas.height,
+                50 + Math.random() * 100,
+                (Math.random() - 0.5) * 0.01
+            ));
+        }
+        
+        function animate() {
+            ctx.fillStyle = 'rgba(10, 14, 23, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            rotors.forEach(rotor => {
+                rotor.update();
+                rotor.draw();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
