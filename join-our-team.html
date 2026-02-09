@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Our Team | TensileEra</title>
+    <meta name="description" content="Building the infrastructure of the next century. We are seeking builders, engineers, and scientists ready to transition from theory to execution.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-bg: #0A0E17;
+            --secondary-bg: #131823;
+            --accent-cyan: #00D9FF;
+            --accent-orange: #FF6B35;
+            --text-primary: #E8E9ED;
+            --text-secondary: #8E9AAF;
+            --border-color: #1F2937;
+            --highlight-bg: #0D1117;
+        }
+        
+        [data-theme="light"] {
+            --primary-bg: #F5F7FA;
+            --secondary-bg: #FFFFFF;
+            --accent-cyan: #0099CC;
+            --accent-orange: #FF6B35;
+            --text-primary: #1A1F2E;
+            --text-secondary: #4A5568;
+            --border-color: #E2E8F0;
+            --highlight-bg: #EDF2F7;
+        }
+        
+        body {
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 30px;
+            z-index: 10000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--secondary-bg);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 6px 30px rgba(0, 217, 255, 0.3);
+        }
+        
+        .theme-toggle svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-icon {
+            position: absolute;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .theme-icon.hidden {
+            opacity: 0;
+            transform: scale(0) rotate(180deg);
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 40px;
+            z-index: 999;
+            transition: background 0.3s ease;
+        }
+        
+        [data-theme="light"] .nav {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-cyan);
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 140px 40px 80px;
+            text-align: center;
+        }
+        
+        .hero-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out 0.2s both;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            animation: fadeIn 1s ease-out 0.4s both;
+            line-height: 1.8;
+        }
+        
+        /* Content */
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .section {
+            margin-bottom: 100px;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        
+        .section-text {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            line-height: 2;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        
+        .section-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        /* Special Section for Scientists */
+        .scientist-section {
+            background: var(--highlight-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 60px 50px;
+            margin: 80px 0;
+            position: relative;
+        }
+        
+        .scientist-section::before {
+            content: 'PROTOCOL';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+        
+        .scientist-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            color: var(--accent-cyan);
+        }
+        
+        .scientist-subtitle {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 600;
+            margin: 40px 0 25px;
+            letter-spacing: 1px;
+        }
+        
+        .scientist-text {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            line-height: 2;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        .scientist-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        /* Covenant List */
+        .covenant-list {
+            list-style: none;
+            margin: 40px 0;
+            padding: 0;
+        }
+        
+        .covenant-item {
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            background: var(--secondary-bg);
+            border-left: 3px solid var(--accent-orange);
+            transition: all 0.3s ease;
+        }
+        
+        .covenant-item:hover {
+            transform: translateX(10px);
+            border-left-width: 5px;
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.1);
+        }
+        
+        .covenant-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .covenant-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .covenant-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        /* Doctrine Section */
+        .doctrine-section {
+            background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--highlight-bg) 100%);
+            border: 2px solid var(--accent-orange);
+            border-left: 6px solid var(--accent-orange);
+            padding: 60px 50px;
+            margin: 80px 0;
+            position: relative;
+        }
+        
+        .doctrine-section::before {
+            content: 'HIRING DOCTRINE';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+        
+        .doctrine-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+            color: var(--accent-orange);
+        }
+        
+        .doctrine-text {
+            font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+            line-height: 2;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+        
+        .doctrine-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .doctrine-highlight {
+            background: var(--secondary-bg);
+            border-left: 4px solid var(--accent-orange);
+            padding: 30px 35px;
+            margin: 35px 0;
+            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+            line-height: 1.9;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        /* Profile Types */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .profile-card {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            padding: 35px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent-cyan);
+            transition: height 0.4s ease;
+        }
+        
+        .profile-card:hover::before {
+            height: 100%;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.1);
+        }
+        
+        .profile-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .profile-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .profile-description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        /* Application Instructions */
+        .application-box {
+            background: var(--secondary-bg);
+            border: 2px solid var(--accent-cyan);
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .application-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        
+        .application-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .application-list li {
+            padding: 15px 0 15px 30px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            position: relative;
+        }
+        
+        .application-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+        
+        .application-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 40px;
+            background: var(--secondary-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin: 80px -40px;
+        }
+        
+        .cta-title {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+        
+        .cta-text {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            background: var(--accent-cyan);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent-cyan);
+            box-shadow: 0 0 50px rgba(0, 217, 255, 0.5);
+            transform: translateY(-3px);
+        }
+        
+        .email-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .email-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 40px 40px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-brand {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-note {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .theme-toggle {
+                width: 50px;
+                height: 50px;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .theme-toggle svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-brand {
+                font-size: 1.4rem;
+            }
+            
+            .hero {
+                padding: 120px 20px 60px;
+            }
+            
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .scientist-section {
+                padding: 40px 25px;
+                margin: 60px -20px;
+            }
+            
+            .doctrine-section {
+                padding: 40px 25px;
+                margin: 60px -20px;
+            }
+            
+            .cta-section {
+                padding: 60px 20px;
+                margin: 60px -20px;
+            }
+            
+            .application-box {
+                padding: 30px 20px;
+            }
+            
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/>
+        </svg>
+        <svg class="theme-icon moon-icon hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/>
+        </svg>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">TENSILEERA</a>
+            <a href="index.html" class="nav-link">Home</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-label">CAREERS AT KTX</div>
+        <h1 class="hero-title">JOIN OUR TEAM</h1>
+        <p class="hero-subtitle">
+            We are building the infrastructure of the next century.<br>
+            Linear scaling. Volume-decoupled deployment. Multi-domain resilience.
+        </p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Mission Section -->
+        <section class="section">
+            <h2 class="section-title">THE MISSION</h2>
+            <p class="section-text">
+                TensileEra exists to transition civilization from static, mass-based engineering to dynamic, energy-based engineering. We are not incrementally improving existing systems. We are <strong>obsoleting the constraints</strong> that defined them.
+            </p>
+            <p class="section-text">
+                This requires minds capable of rejecting consensus when the physics disagrees. It requires builders who value <strong>operational truth</strong> over theoretical elegance. It requires the discipline to derive solutions from first principles rather than copying what has been done before.
+            </p>
+            <p class="section-text">
+                History shows us that regime changes in engineering are never led by the establishment. They are led by outsiders who see what others refuse to believe. The next century is built by people the previous century would filter out.
+            </p>
+            <p class="section-text">
+                If you are reading this, you already know that something is broken. The question is: Are you ready to fix it?
+            </p>
+        </section>
+
+        <!-- Who We Are Looking For -->
+        <section class="section">
+            <h2 class="section-title">WHO WE ARE LOOKING FOR</h2>
+            
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <div class="profile-icon">⚙️</div>
+                    <h3 class="profile-title">Systems Engineers</h3>
+                    <p class="profile-description">
+                        You understand that the whole is not the sum of the parts. You can architect multi-domain systems where mechanical, electrical, and control subsystems converge into operational capability.
+                    </p>
+                </div>
+                
+                <div class="profile-card">
+                    <div class="profile-icon">🔧</div>
+                    <h3 class="profile-title">Mechanical Engineers</h3>
+                    <p class="profile-description">
+                        You know materials. You know stress, strain, fatigue, and failure modes. You can convert a napkin sketch into fabrication drawings that survive first contact with reality.
+                    </p>
+                </div>
+                
+                <div class="profile-card">
+                    <div class="profile-icon">⚡</div>
+                    <h3 class="profile-title">Electrical / Power Engineers</h3>
+                    <p class="profile-description">
+                        You design power systems that scale. You understand that volts, amps, and thermals are not abstractions but physical constraints that must be engineered around.
+                    </p>
+                </div>
+                
+                <div class="profile-card">
+                    <div class="profile-icon">🎯</div>
+                    <h3 class="profile-title">Control Systems Engineers</h3>
+                    <p class="profile-description">
+                        You stabilize unstable systems. You write control laws that make flexible structures behave like rigid ones. You bridge the gap between theory and hardware.
+                    </p>
+                </div>
+                
+                <div class="profile-card">
+                    <div class="profile-icon">💻</div>
+                    <h3 class="profile-title">Software / Embedded Engineers</h3>
+                    <p class="profile-description">
+                        You write deterministic code that runs on real-time systems. You understand that software is physics expressed in logic, and that latency kills.
+                    </p>
+                </div>
+                
+                <div class="profile-card">
+                    <div class="profile-icon">🧪</div>
+                    <h3 class="profile-title">Applied Scientists</h3>
+                    <p class="profile-description">
+                        You derive truth from first principles. You can take a whiteboard equation and turn it into a testable hypothesis, a prototype, and a product.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOCTRINE SECTION: Why We Hire the Way We Do -->
+        <section class="doctrine-section">
+            <h2 class="doctrine-title">WHY WE HIRE THE WAY WE DO</h2>
+            
+            <p class="doctrine-text">
+                The last time humanity rewrote the physics of flight, the establishment ignored the inventors.
+            </p>
+            
+            <p class="doctrine-text">
+                The Wright Brothers were not aeronautical engineers. They were bicycle mechanics. They had no formal training. No research grants. No peer-reviewed publications. When they achieved powered flight in 1903, <strong>the scientific community dismissed them for years</strong>.
+            </p>
+            
+            <p class="doctrine-text">
+                They were filtered out by every credible institution of their time. And yet, they built the future.
+            </p>
+            
+            <div class="doctrine-highlight">
+                The Wright Brothers were not the exception. They were the rule. Revolutionary breakthroughs do not come from the credentialed center. They come from the outsiders.
+            </div>
+            
+            <p class="doctrine-text">
+                TensileEra exists to ensure <strong>the next century is not delayed by the same mistake</strong>.
+            </p>
+            
+            <p class="doctrine-text">
+                We hire for <strong>capability, curiosity, and proof of work</strong>. We do not hire for pedigree, culture fit, or credentials. We do not filter for degrees, GPA, or where you worked before. We do not ask behavioral interview questions designed to select for conformity.
+            </p>
+            
+            <p class="doctrine-text">
+                If the current system would have rejected you, that may be exactly why you belong here.
+            </p>
+            
+            <div class="doctrine-highlight">
+                If you can build what others say is impossible, you belong here.
+            </div>
+        </section>
+
+        <!-- SPECIAL SECTION: To the Scientific Community -->
+        <section class="scientist-section">
+            <h2 class="scientist-title">TO THE SCIENTIFIC COMMUNITY:<br>THE PROTOCOL OF RE-INITIALIZATION</h2>
+            
+            <p class="scientist-text">
+                We do not reject the Academy; we reject its stasis.
+            </p>
+            
+            <p class="scientist-text">
+                TensileEra is built on <strong>deep physics</strong>. We respect the rigor of the scientific method. We value the disciplined mind that can derive truth from a blank sheet of paper.
+            </p>
+            
+            <p class="scientist-text">
+                However, to build the Tensile Age, you must be willing to undergo a <strong>Re-Initialization</strong>.
+            </p>
+            
+            <h3 class="scientist-subtitle">The "Born Again" Engineer</h3>
+            
+            <p class="scientist-text">
+                We welcome refugees from the ivory tower: PhDs, researchers, and theorists, if, and only if, you are ready to <strong>unlearn</strong>.
+            </p>
+            
+            <p class="scientist-text">
+                In the Rigid Age (Academia / Legacy R&D), success is measured by citations, impact factors, and the complexity of your equations. In the Tensile Age, success is measured by <strong>Operational Truth</strong>.
+            </p>
+            
+            <p class="scientist-text">
+                We are looking for <strong>Scientists who are ready to become Builders</strong>. If you are tired of simulating the world and ready to change it, we offer you a new covenant:
+            </p>
+            
+            <ul class="covenant-list">
+                <li class="covenant-item">
+                    <span class="covenant-number">01</span>
+                    <div class="covenant-title">Abandon Consensus</div>
+                    <div class="covenant-text">
+                        We do not care if your idea is peer-reviewed. We care if it survives the wind tunnel.
+                    </div>
+                </li>
+                
+                <li class="covenant-item">
+                    <span class="covenant-number">02</span>
+                    <div class="covenant-title">Abandon Complexity</div>
+                    <div class="covenant-text">
+                        Complexity is not sophistication; it is entropy. We value the elegance of the Minimum Logical Energy solution.
+                    </div>
+                </li>
+                
+                <li class="covenant-item">
+                    <span class="covenant-number">03</span>
+                    <div class="covenant-title">Apply Your Science in New Ways</div>
+                    <div class="covenant-text">
+                        Your knowledge of material science, fluid dynamics, or control theory is a weapon. Stop using it to write papers. Start using it to conquer gravity.
+                    </div>
+                </li>
+            </ul>
+            
+            <p class="scientist-text">
+                If you are willing to leave the safety of the theory for the brutality of the build, <strong>you have a home here</strong>.
+            </p>
+        </section>
+
+        <!-- What We Expect -->
+        <section class="section">
+            <h2 class="section-title">WHAT WE EXPECT</h2>
+            <p class="section-text">
+                <strong>First Principles Thinking:</strong> You can derive solutions from physics, not from precedent. If the textbook is wrong, you prove it.
+            </p>
+            <p class="section-text">
+                <strong>Bias Toward Action:</strong> We do not optimize for perfect. We optimize for learning velocity. Build, test, iterate.
+            </p>
+            <p class="section-text">
+                <strong>Intellectual Honesty:</strong> You admit when you do not know. You update your beliefs when the data disagrees. Ego has no place in engineering.
+            </p>
+            <p class="section-text">
+                <strong>Mission Alignment:</strong> You understand that we are not building toys. We are building infrastructure that will define the next century. Act accordingly.
+            </p>
+        </section>
+
+        <!-- How to Join -->
+        <section class="section">
+            <h2 class="section-title">HOW TO JOIN</h2>
+            <p class="section-text">
+                We do not want your standard resume. We do not care where you went to school or who you worked for. We want proof that you can <strong>think</strong> and <strong>build</strong>.
+            </p>
+            <p class="section-text">
+                Show us capability. Show us curiosity. Show us that you can turn physics into hardware.
+            </p>
+            
+            <div class="application-box">
+                <h3 class="application-title">For Engineers & Builders</h3>
+                <ul class="application-list">
+                    <li>Send us a technical portfolio. Show us something you designed, built, or fixed.</li>
+                    <li>Describe a system you optimized. What was the constraint? How did you solve it?</li>
+                    <li>If you have no portfolio yet, show us your process. Walk us through how you would solve a hard problem from first principles.</li>
+                </ul>
+            </div>
+            
+            <div class="application-box">
+                <h3 class="application-title">For Academics & Researchers</h3>
+                <ul class="application-list">
+                    <li><strong>Do not send us your CV with a list of 50 publications.</strong></li>
+                    <li>Send us the <strong>one paper</strong> where you proposed something radical that was ignored.</li>
+                    <li>Send us a <strong>"Translation"</strong>: Take a complex concept you know and explain how it could be applied to a kinetic, physical system today.</li>
+                    <li>Show us you can cross the gap from <strong>Abstract to Concrete</strong>.</li>
+                </ul>
+            </div>
+            
+            <div class="application-box">
+                <h3 class="application-title">For Everyone</h3>
+                <ul class="application-list">
+                    <li>Include a brief statement: Why TensileEra? Why now?</li>
+                    <li>No cover letters. No buzzwords. Just clarity.</li>
+                </ul>
+            </div>
+            
+            <p class="section-text" style="margin-top: 40px;">
+                Submit applications to: <a href="/cdn-cgi/l/email-protection#294a485b4c4c5b5a695d4c475a40454c4c5b48074a4644" class="email-link"><span class="__cf_email__" data-cfemail="ed8e8c9f88889f9ead9988839e848188889f8cc38e8280">[email&#160;protected]</span></a>
+            </p>
+        </section>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">THE GEOMETRY OF THE NEXT CENTURY</h2>
+            <p class="cta-text">
+                We are not waiting for permission from the establishment.<br>
+                We are not waiting for funding cycles or peer review.<br>
+                We are building now.<br><br>
+                If you were filtered out by the old system, that may be exactly why the new one needs you.
+            </p>
+            <a href="/cdn-cgi/l/email-protection#53303221363621201327363d203a3f363621327d303c3e" class="cta-button">Apply Now</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-brand">KTX</div>
+        <div class="footer-note">Tensile Era (TE) • Dynamic Engineering • 2026</div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', currentTheme);
+        
+        // Update icon visibility based on current theme
+        if (currentTheme === 'light') {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Toggle icons
+            sunIcon.classList.toggle('hidden');
+            moonIcon.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
