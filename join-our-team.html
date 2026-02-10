@@ -175,7 +175,73 @@
             animation: fadeIn 1s ease-out 0.4s both;
             line-height: 1.8;
         }
+                .logo-container {
+            margin-bottom: 60px;
+            animation: fadeInDown 1.2s ease-out;
+        }
         
+        .tensile-logo {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+        
+        .rotating-element {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: spin 10s linear infinite;
+        }
+        
+        .rotor-line {
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: var(--accent-cyan);
+            top: 50%;
+            left: 50%;
+            transform-origin: left center;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .rotor-line:nth-child(1) { transform: rotate(0deg); }
+        .rotor-line:nth-child(2) { transform: rotate(90deg); }
+        .rotor-line:nth-child(3) { transform: rotate(180deg); }
+        .rotor-line:nth-child(4) { transform: rotate(270deg); }
+        
+        .hub {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px var(--accent-cyan);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tip-mass {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent-orange);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tip-mass:nth-child(1) { top: 50%; right: -4px; transform: translateY(-50%); }
+        .tip-mass:nth-child(2) { left: 50%; bottom: -4px; transform: translateX(-50%); }
+        .tip-mass:nth-child(3) { top: 50%; left: -4px; transform: translateY(-50%); }
+        .tip-mass:nth-child(4) { left: 50%; top: -4px; transform: translateX(-50%); }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
         /* Content */
         .content {
             max-width: 1000px;
