@@ -982,7 +982,92 @@
                 max-width: 300px;
             }
         }
+
+        /* ===== KTX authorization / compliance blocks ===== */
+        .auth-banner {
+            position: relative; z-index: 2;
+            border-top: 3px solid var(--accent-cyan);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--secondary-bg);
+            padding: 40px 16px;
+        }
+        .auth-inner { max-width: 1100px; margin: 0 auto; }
+        .auth-kicker {
+            font-family: 'Space Mono', monospace; font-size: 11px;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--accent-cyan); margin-bottom: 12px;
+        }
+        .auth-title {
+            font-family: 'Space Mono', monospace; font-weight: 700;
+            font-size: clamp(20px, 3.4vw, 32px); line-height: 1.2;
+            color: var(--text-primary); margin-bottom: 20px; text-transform: uppercase;
+        }
+        .data-table {
+            width: 100%; border-collapse: collapse;
+            font-family: 'Space Mono', monospace; font-size: 13px;
+            margin-bottom: 20px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px; text-align: left; vertical-align: top;
+        }
+        .data-table th {
+            width: 34%; color: var(--text-secondary); font-weight: 400;
+            text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px;
+        }
+        .data-table td { color: var(--text-primary); overflow-wrap: anywhere; }
+        .auth-link {
+            display: inline-block; font-family: 'Space Mono', monospace; font-size: 12px;
+            letter-spacing: 0.1em; color: var(--accent-cyan); text-decoration: none;
+            border: 1px solid var(--accent-cyan); padding: 10px 18px;
+        }
+        .auth-link:hover { background: var(--accent-cyan); color: var(--primary-bg); }
+
+        .pillar-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            border: 1px solid var(--border-color); margin-top: 32px;
+        }
+        .pillar {
+            border: 1px solid var(--border-color); padding: 24px;
+            background: var(--secondary-bg);
+        }
+        .pillar-id {
+            font-family: 'Space Mono', monospace; font-size: 11px;
+            letter-spacing: 0.2em; color: var(--accent-orange); margin-bottom: 10px;
+        }
+        .pillar-title {
+            font-family: 'Space Mono', monospace; font-size: 16px; font-weight: 700;
+            text-transform: uppercase; color: var(--text-primary); margin-bottom: 12px;
+        }
+        .pillar-def { font-size: 16px; line-height: 1.55; color: var(--text-secondary); }
+
+        .footer-manifest { max-width: 900px; margin: 0 auto 28px; text-align: left; }
+        .footer-manifest address { font-style: normal; }
+        .footer-manifest a { color: var(--accent-cyan); }
+        @media (max-width: 600px) {
+            .data-table th, .data-table td { display: block; width: 100%; }
+            .data-table th { border-bottom: none; padding-bottom: 2px; }
+        }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Kunfirm Innovative Services LLC",
+      "alternateName": ["KTX", "VSG Technologies", "Tensile Era"],
+      "url": "https://tensileera.com",
+      "email": "access@tensileera.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "221 W 10th St, Suite 441",
+        "addressLocality": "Wilmington",
+        "addressRegion": "DE",
+        "postalCode": "19801",
+        "addressCountry": "US"
+      },
+      "identifier": { "@type": "PropertyValue", "propertyID": "CAGE", "value": "9U5T0" }
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -1060,6 +1145,24 @@
             <a href="mailto:access@tensileera.com" class="cta-secondary">Contact Us</a>
         </div>
     </section>
+
+    <!-- Federal Authorization Banner -->
+    <section class="auth-banner" id="faa-exemption" aria-labelledby="auth-title">
+        <div class="auth-inner">
+            <div class="auth-kicker">FAA Grant of Exemption No. 26214 &middot; Docket FAA-2025-5731</div>
+            <h2 class="auth-title" id="auth-title">Section 44807 Operating Exemption Secured for Class G Airspace.</h2>
+            <table class="data-table">
+                <tr><th scope="row">Grantee</th><td>Kunfirm Innovative Services LLC dba VSG Technologies (KTX)</td></tr>
+                <tr><th scope="row">Docket</th><td>FAA-2025-5731 &middot; Decision posted 2026-07-17</td></tr>
+                <tr><th scope="row">Aircraft</th><td>VSG-HL-01 &ldquo;Bolt&rdquo;</td></tr>
+                <tr><th scope="row">Scope</th><td>UAS lift operations; evaluation, testing and demonstration of tensile-lift systems</td></tr>
+                <tr><th scope="row">Max takeoff weight</th><td>275 lb</td></tr>
+                <tr><th scope="row">Airspace</th><td>Class G</td></tr>
+                <tr><th scope="row">Valid through</th><td>July 2028</td></tr>
+            </table>
+            <a class="auth-link" href="https://www.regulations.gov/document/FAA-2025-5731-0004" target="_blank" rel="noopener">VIEW FAA DECISION &#x2197;</a>
+        </div>
+    </section>
     
     <!-- Content Sections -->
 <div class="content">
@@ -1067,11 +1170,9 @@
         <section class="section">
             <h2 class="section-title">THE PROBLEM</h2>
             <p class="body-text">
-                For 100 years, Aerospace has fought gravity with mass.<br>
-                We built <strong>heavier beams</strong> to carry heavier loads.<br>
-                We accepted the <strong>Cube-Square Law</strong> as a limit.<br>
-                We accepted that scaling up meant slowing down.<br><br>
-                <strong>We were wrong.</strong>
+                Conventional aerospace structures carry load in compression.<br>
+                Under the square-cube law, structural mass grows faster than lift capacity as size increases.<br>
+                Rotorcraft scale is capped by spar mass, not by available power.
             </p>
         </section>
         
@@ -1083,7 +1184,7 @@
                     <div class="principle-label">Structure</div>
                     <h3 class="principle-title">Linear Scaling TensileEra Law</h3>
                     <p class="principle-description">
-                        Mass scales linearly with size. Not cubically. The architecture bypasses fundamental limits.
+                        Structural mass scales linearly with rotor length, not with its cube.
                     </p>
                     <div class="equation">M ∝ L</div>
                 </div>
@@ -1092,7 +1193,7 @@
                     <div class="principle-label">Energy</div>
                     <h3 class="principle-title">Geometry Over Material</h3>
                     <p class="principle-description">
-                        Structure emerges from physics, not mass. Motion creates rigidity where none existed.
+                        Rotation tensions the tethers. Centrifugal load provides the bending stiffness a rigid spar would otherwise supply.
                     </p>
                     <div class="equation">F = mrω²</div>
                 </div>
@@ -1101,7 +1202,7 @@
                     <div class="principle-label">Deployment</div>
                     <h3 class="principle-title">Packable Infrastructure</h3>
                     <p class="principle-description">
-                        The system packs smaller than the mission. Infrastructure ships inside the box.
+                        Tension members stow compactly. Stowed volume scales with length, not swept area.
                     </p>
                     <div class="equation">Volume ∝ L</div>
                 </div>
@@ -1112,9 +1213,8 @@
         <section class="section">
             <h2 class="section-title">THE DIVERGENCE</h2>
             <p class="body-text">
-                At small scales, the difference is marginal.<br>
-                At <strong>operational scales</strong>, the difference is <strong>decisive</strong>.<br>
-                The bigger we build, the more we win.
+                Rigid structural mass scales with L&sup3;. Tensile structural mass scales with L.<br>
+                The mass ratio between the two grows with L&sup2;.
             </p>
             
             <div class="comparison">
@@ -1122,13 +1222,13 @@
                     <div class="comparison-label">Legacy Architecture</div>
                     <h3 class="comparison-title">RIGID / COMPRESSIVE</h3>
                     <p class="principle-description">
-                        Traditional structures fight fundamental forces. Mass grows exponentially with scale.
+                        Compressive spars carry load in bending. Structural mass scales with the cube of characteristic length.
                     </p>
                     <div class="comparison-equation">
                         M_rigid ∝ L³
                     </div>
                     <p class="principle-description" style="margin-top: 20px;">
-                        <strong>Result:</strong> Physics wall. Heavy-lift becomes impossible.
+                        <strong>Result:</strong> Structural mass fraction rises with scale, capping practical rotor size.
                     </p>
                 </div>
                 
@@ -1136,13 +1236,13 @@
                     <div class="comparison-label">Next-Gen Architecture</div>
                     <h3 class="comparison-title">TENSILE / DYNAMIC</h3>
                     <p class="principle-description">
-                        New architecture leverages different physics. Mass grows linearly with scale.
+                        Centrifugally-stiffened tethers carry load in tension. Structural mass scales linearly with length.
                     </p>
                     <div class="comparison-equation">
                         M_tensile ∝ L
                     </div>
                     <p class="principle-description" style="margin-top: 20px;">
-                        <strong>Result:</strong> Advantage grows as L². New category unlocked.
+                        <strong>Result:</strong> Mass advantage over rigid architecture grows as L².
                     </p>
                 </div>
             </div>
@@ -1152,8 +1252,7 @@
         <section class="section">
             <h2 class="section-title">APPLICATIONS</h2>
             <p class="body-text">
-                A foundational architecture enables capabilities across domains.<br>
-                Linear scaling unlocks what was previously <strong>physically impossible</strong>.
+                Target application domains for the tensile architecture.
             </p>
             
             <div class="usecase-grid">
@@ -1161,7 +1260,7 @@
                     <div class="usecase-icon">⚡</div>
                     <h3 class="usecase-title">Energy Generation</h3>
                     <p class="usecase-description">
-                        Utility-scale systems with swept areas measured in acres, not square meters. Fundamentally different economics.
+                        Utility-scale systems with swept areas measured in acres, not square meters.
                     </p>
                     <span class="usecase-tag">Commercial</span>
                 </div>
@@ -1197,7 +1296,7 @@
                     <div class="usecase-icon">🎯</div>
                     <h3 class="usecase-title">Contested Environments</h3>
                     <p class="usecase-description">
-                        Survivability through physics, not armor. Graceful degradation. Ballistic transparency at scale.
+                        Distributed tension structure with no single load-bearing spar. Graceful degradation under damage.
                     </p>
                     <span class="usecase-tag">Defense</span>
                 </div>
@@ -1219,68 +1318,56 @@
             <span class="section-label">THE FUNDAMENTAL CONSTRAINT</span>
             <h2 class="section-title">THE TYRANNY OF CUBIC SCALING</h2>
             <p class="body-text">
-                Every civilization has built infrastructure the same way: pile mass against force until equilibrium is reached. This strategy imposes an inescapable mathematical ceiling.
+                Compressive structures carry load by adding mass. Under the square-cube law, this imposes a scaling ceiling.
             </p>
             <p class="body-text">
-                When you double the size of a structure, its volume grows eight times. Its strength grows four times. The result is a cubic trap that has limited human engineering for centuries.
+                Double a structure&rsquo;s linear dimensions and its mass grows 8&times;, while its load-bearing cross-section grows 4&times;.
             </p>
             <p class="body-text">
-                Helicopters stop scaling at 20 tons. Wind turbines require 1,500-ton platforms. Cranes collapse under their own mass. These are not failures of design. They are constraints imposed by geometry itself.
-            </p>
-            <p class="body-text">
-                The industrial age was built on compression. The next century cannot be.
+                The largest production helicopter, the Mi-26, lifts roughly 20 tonnes of payload. Large offshore wind turbines stand on foundations exceeding 1,000 tonnes. Both limits follow from compressive scaling.
             </p>
         </section>
         
         <!-- The Solution Section -->
         <section class="section">
-            <span class="section-label">THE BREAKTHROUGH</span>
-            <h2 class="section-title">A NEW ARCHITECTURAL PRINCIPLE</h2>
+            <span class="section-label">STRUCTURAL PRINCIPLE</span>
+            <h2 class="section-title">LOAD PATH IN TENSION</h2>
             <p class="body-text">
-                For the first time in human history, we have unlocked a structural paradigm that escapes cubic scaling.
+                The architecture carries load through centrifugally-stiffened tethers instead of compressive spars. Tension members do not buckle, so they need no reinforcement that grows faster than size.
             </p>
             <p class="body-text">
-                The architecture does not resist gravity by piling mass beneath the load. It does not compress. It does not buckle. It does not require exponential reinforcement as size increases.
-            </p>
-            <p class="body-text">
-                Instead, it exploits a physical principle that scales linearly. Systems that are twice as large require only twice the material. Ten times larger requires ten times the material. The cubic trap is broken.
-            </p>
-            <p class="body-text">
-                This is not an improvement to existing platforms. This is a categorical shift in what is physically possible.
+                Structural material scales linearly: a system twice as large requires twice the material; ten times as large, ten times the material.
             </p>
         </section>
         
         <!-- The Technology Section -->
         <section class="section">
-            <span class="section-label">CORE CAPABILITIES</span>
-            <h2 class="section-title">WHAT BECOMES POSSIBLE</h2>
+            <span class="section-label">TECHNOLOGY</span>
+            <h2 class="section-title">CORE ARCHITECTURE</h2>
             <p class="body-text">
-                When cubic scaling is removed, systems that were impossible become inevitable. The constraints that defined the last century disappear.
+                Four subsystems define the Tensile Era architecture. Proprietary geometry is not published.
             </p>
             
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <div class="tech-icon">⚡</div>
-                    <h3 class="tech-title">Unlimited Scaling</h3>
-                    <p class="tech-description">
-                        Systems scale linearly with no physical ceiling. Build 10x larger without exponential mass overhead. The only limits are material availability, not geometry.
-                    </p>
+            <div class="pillar-grid">
+                <div class="pillar">
+                    <div class="pillar-id">PILLAR 01</div>
+                    <h3 class="pillar-title">The Tensile Scaling Law</h3>
+                    <p class="pillar-def">Replacing compressive composite spars with centrifugally-stiffened tethers, shifting structural mass scaling from cubic to linear.</p>
                 </div>
-                
-                <div class="tech-card">
-                    <div class="tech-icon">🔄</div>
-                    <h3 class="tech-title">Volume-Decoupled Deployment</h3>
-                    <p class="tech-description">
-                        Massive operational systems stored in compact volumes. Deploy from shipping containers. Transport by standard logistics. No cranes, no assembly rigs, no infrastructure overhead.
-                    </p>
+                <div class="pillar">
+                    <div class="pillar-id">PILLAR 02</div>
+                    <h3 class="pillar-title">Neuro-Lock Edge AI</h3>
+                    <p class="pillar-def">Eliminating mechanical swashplates via 800&nbsp;Hz distributed tip-motor differential thrust and active aeroelastic flutter damping.</p>
                 </div>
-                
-                <div class="tech-card">
-                    <div class="tech-icon">📐</div>
-                    <h3 class="tech-title">Deterministic Performance</h3>
-                    <p class="tech-description">
-                        Physics-governed equilibrium states. No hydraulics. No active control loops. No failure modes introduced by complexity. The system stabilizes because geometry demands it.
-                    </p>
+                <div class="pillar">
+                    <div class="pillar-id">PILLAR 03</div>
+                    <h3 class="pillar-title">The Iron Web</h3>
+                    <p class="pillar-def">Passive mechanical deadlock failsafe ensuring ballistic autorotation and geometry retention during zero-power events.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-id">PILLAR 04</div>
+                    <h3 class="pillar-title">OZO Hybrid Powertrain</h3>
+                    <p class="pillar-def">Turbine-generated High Voltage DC (HVDC) bus providing megawatt-class continuous power to distal propulsion nodes.</p>
                 </div>
             </div>
         </section>
@@ -1292,37 +1379,34 @@
             
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-value">10x</div>
-                    <div class="metric-label">Scale Advantage</div>
+                    <div class="metric-value">4:1</div>
+                    <div class="metric-label">Payload Ratio</div>
                 </div>
                 
                 <div class="metric-card">
-                    <div class="metric-value">1/8</div>
-                    <div class="metric-label">Mass Overhead</div>
+                    <div class="metric-value">15.2%</div>
+                    <div class="metric-label">Structural Mass Fraction</div>
                 </div>
                 
                 <div class="metric-card">
-                    <div class="metric-value">90%</div>
-                    <div class="metric-label">Volume Reduction</div>
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">Rotor Void Fraction</div>
                 </div>
                 
                 <div class="metric-card">
-                    <div class="metric-value">Hours</div>
-                    <div class="metric-label">Deployment Time</div>
+                    <div class="metric-value">1&nbsp;kV</div>
+                    <div class="metric-label">OZO HVDC Architecture</div>
                 </div>
             </div>
             
-            <p class="body-text" style="margin-top: 50px;">
-                These are not incremental improvements. They represent the difference between a system constrained by cubic scaling and one that is not. The laws of physics change what is economically viable.
-            </p>
         </section>
         
         <!-- Applications Section -->
         <section class="section">
             <span class="section-label">DEPLOYMENT DOMAINS</span>
-            <h2 class="section-title">WHERE LEGACY SYSTEMS FAIL</h2>
+            <h2 class="section-title">TARGET MISSION CLASSES</h2>
             <p class="body-text">
-                Any mission currently constrained by cubic scaling, deployment logistics, or mass overhead is a candidate for replacement. The domains where this matters most:
+                Mission classes constrained by cubic structural scaling, deployment logistics, or mass overhead:
             </p>
             
             <div class="domain-grid">
@@ -1365,84 +1449,19 @@
         <section class="section">
             <h2 class="section-title">THE STRATEGIC IMPLICATION</h2>
             <p class="body-text">
-                This is not a better helicopter. This is not a more efficient crane.<br>
-                This is the obsolescence of the constraints that made those systems necessary.<br><br>
-                
-                Missions that required months of logistics preparation can be executed in hours.<br>
-                Systems that required massive fixed infrastructure can deploy from shipping containers.<br>
-                Platforms that were economically impossible become strategically inevitable.<br><br>
-                
-                The infrastructure of the next century will not resemble the infrastructure of the last.<br>
-                Because the geometry no longer requires it.
+                The tensile architecture targets missions currently limited by rigid-structure mass scaling: heavy lift, container-deployable infrastructure, and persistent platforms.<br><br>
+                Current authorized flight operations are limited to the testing and demonstration scope of FAA Exemption No. 26214 in Class G airspace.
             </p>
         </section>
     </div>
 
-    <!-- FAA Exemption Milestone -->
-    <section class="faa-milestone" style="
-      background: #131823;
-      border-top: 1px solid #1F2937;
-      border-bottom: 1px solid #1F2937;
-      padding: 48px 24px;
-      text-align: center;
-    ">
-      <div style="max-width: 760px; margin: 0 auto;">
-        <div style="
-          font-family: 'Space Mono', monospace;
-          font-size: 11px;
-          letter-spacing: 0.2em;
-          color: #00D9FF;
-          text-transform: uppercase;
-          margin-bottom: 16px;
-        ">FAA Exemption &middot; Docket No. FAA-2025-5731</div>
-
-        <p style="
-          font-family: 'Rajdhani', sans-serif;
-          font-size: 22px;
-          font-weight: 700;
-          color: #E8E9EA;
-          margin: 0 0 12px 0;
-          line-height: 1.3;
-        ">KTX Receives Federal Aviation Administration Grant of Exemption No. 26214</p>
-
-        <p style="
-          font-family: 'Rajdhani', sans-serif;
-          font-size: 16px;
-          color: #8E9AAF;
-          margin: 0 0 24px 0;
-          line-height: 1.6;
-        ">Authorization to conduct UAS lift operations, evaluate, test, and demonstrate
-        tensile-lift systems to others. Class G airspace. Valid through July 2028.</p>
-
-        <a href="https://www.regulations.gov/document/FAA-2025-5731-0002"
-           target="_blank"
-           rel="noopener"
-           style="
-             display: inline-flex;
-             align-items: center;
-             gap: 8px;
-             font-family: 'Space Mono', monospace;
-             font-size: 12px;
-             color: #00D9FF;
-             text-decoration: none;
-             border: 1px solid rgba(0,217,255,0.3);
-             padding: 10px 20px;
-             border-radius: 2px;
-             letter-spacing: 0.1em;
-             transition: all 0.2s;
-           "
-           onmouseover="this.style.background='rgba(0,217,255,0.08)'"
-           onmouseout="this.style.background='transparent'"
-        >VIEW PUBLIC DOCKET &#x2197;</a>
-      </div>
-    </section>
 
     <!-- CTA Section -->
     <section class="cta-section">
         <h2 class="cta-title">THE GEOMETRY OF THE NEXT CENTURY</h2>
         <p class="cta-text">
-            Linear scaling. Volume-decoupled deployment. Multi-domain resilience.<br>
-            The infrastructure that scales when nothing else can.
+            Linear structural scaling. Container-deployable systems.<br>
+            FAA Exemption No. 26214 &middot; Class G &middot; VSG-HL-01.
         </p>
         <a href="mailto:access@tensileera.com" class="cta-button">Inquire for Access</a>
         <a href="join-our-team.html" class="cta-button-secondary">Join Our Team</a>
@@ -1450,7 +1469,16 @@
     
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-brand">Kunfirm Technologies (KTX)</div>
+        <div class="footer-brand">Kunfirm Innovative Services LLC (KTX)</div>
+        <div class="footer-manifest">
+            <table class="data-table">
+                <tr><th scope="row">Entity</th><td>Kunfirm Innovative Services LLC (KTX)</td></tr>
+                <tr><th scope="row">Status</th><td>Registered U.S. Government Contractor (CAGE: 9U5T0)</td></tr>
+                <tr><th scope="row">East Coast AAM Operations HQ</th><td><address>221 W 10th St, Suite 441<br>Wilmington, DE 19801</address></td></tr>
+                <tr><th scope="row">Structural Validation Node</th><td>Austin, TX</td></tr>
+                <tr><th scope="row">Primary Contact</th><td><a href="mailto:access@tensileera.com">access@tensileera.com</a></td></tr>
+            </table>
+        </div>
         <div class="footer-tagline">The Tensile-Lift technology and associated tensile rotor systems are protected by multiple Patents Pending in the United States.</div>
         
         <div class="footer-social">
