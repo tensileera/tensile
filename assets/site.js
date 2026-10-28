@@ -79,7 +79,7 @@ window.matchMedia('(min-width: 1001px)').addEventListener('change', event => { i
   window.addEventListener('storage', event => {
     if (event.key === storageKey && readAcceptance()) closeTerms();
   });
-  const page = location.pathname.split('/').pop();
-  const readingPolicy = page === 'terms.html' || page === 'privacy.html';
+  const page = location.pathname.replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '');
+  const readingPolicy = page === 'terms' || page === 'privacy';
   if (!readingPolicy && !readAcceptance()) openTerms();
 })();
